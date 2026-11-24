@@ -27,18 +27,30 @@ on reload.
 
 ## Install on an iPad
 
-The app has to be served over HTTPS (for example GitHub Pages; not set up yet).
+Mapper Log is hosted at **https://snapmapper.github.io** (GitHub Pages, organisation
+`SnapMapper`, repository `snapmapper.github.io`). It has an address of its own, so no other site
+can read the cases it stores on an iPad.
 
-1. Open the app's URL in Safari on the iPad.
+1. Open **https://snapmapper.github.io** in Safari on the iPad.
 2. Share button → **Add to Home Screen** → Add.
 3. Open it once from the Home Screen while online. Every file is cached on that first launch;
    after that it works in airplane mode.
 4. On the **Data** tab, tap **Ask to keep data** so Safari does not clear storage when the iPad
-   runs low on space. (Safari normally grants this to Home Screen apps.)
+   runs low on space. (Safari normally grants this to Home Screen apps.) Then set this iPad's code,
+   and import the site and operator list if your team uses one.
 
-**Updates.** Change `VERSION` in `sw.js` when you deploy. Installed copies notice on their next
-online launch, cache the new files, delete the old ones and show "A new version is ready". Case
-data is in IndexedDB, which updates never touch.
+Cases stay on the iPad they were logged on. Moving to a new address (or a new iPad) means a backup
+and restore, or merge.
+
+**Publishing an update.** Commit the change, bump `VERSION` in `sw.js`, then:
+
+```bash
+sh tools/publish.sh "What changed"
+```
+
+It publishes the committed files, minus `BRIEF.md` and `.claude/`, under the GitHub no-reply
+address. Installed copies notice on their next online launch, cache the new files, delete the old
+ones and show "A new version is ready". Case data is in IndexedDB, which updates never touch.
 
 ## Using it
 
